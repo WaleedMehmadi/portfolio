@@ -3,246 +3,428 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Waleed Almehmadi | CV</title>
+  <title>Waleed Al-Mehmadi | Portfolio</title>
+  <meta
+    name="description"
+    content="Portfolio of Waleed Al-Mehmadi — Software Engineering student at KFUPM focused on cybersecurity, blockchain, and secure software systems."
+  />
+  <meta property="og:title" content="Waleed Al-Mehmadi | Portfolio" />
+  <meta
+    property="og:description"
+    content="Software Engineering student at KFUPM focused on cybersecurity, blockchain, and secure software systems."
+  />
+  <meta property="og:type" content="website" />
+
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet"
+  />
   <link rel="stylesheet" href="style.css" />
+  <script>
+    (function(){
+      const t = localStorage.getItem('theme') ||
+        (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+      if (t === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
+    })();
+  </script>
 </head>
 <body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
   <div class="bg-orb orb-a"></div>
   <div class="bg-orb orb-b"></div>
 
   <header class="site-header" id="top">
     <div class="container nav-wrap">
       <a class="logo" href="#top">Waleed A.</a>
-      <nav class="nav" id="nav">
-        <a href="#objective">Objective</a>
+      <nav class="nav" id="nav" aria-label="Primary navigation">
+        <a href="#about">About</a>
         <a href="#skills">Skills</a>
-        <!-- <a href="#experience">Experience</a> -->
         <a href="#projects">Projects</a>
+        <a href="#github">GitHub</a>
         <a href="#education">Education</a>
         <a href="#contact">Contact</a>
       </nav>
-      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
+      <div class="nav-actions">
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+          <svg class="icon-moon" width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path fill="currentColor" d="M21 12.79A9 9 0 1 1 11.21 3a7 7 0 0 0 9.79 9.79Z"/>
+          </svg>
+          <svg class="icon-sun" width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <circle cx="12" cy="12" r="4" fill="currentColor"/>
+            <path stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M12 2v2M12 20v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M2 12h2M20 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
+          </svg>
+        </button>
+        <button
+          class="nav-toggle"
+          id="navToggle"
+          aria-label="Toggle navigation"
+          aria-expanded="false"
+          aria-controls="nav"
+        >
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
     </div>
   </header>
 
-  <main>
+  <main id="main">
+
+    <!-- ═══ HERO ═══ -->
     <section class="hero">
       <div class="container hero-grid">
+
         <div class="hero-text">
-          <p class="eyebrow">Software Engineering</p>
-          <h1>Waleed Al-Mehmadi</h1>
-          <p class="lead">
-            Junior Software Engineering student at King Fahd University of Petroleum & Minerals, specializing in Cybersecurity and Blockchain, with a strong interest in secure and scalable software systems.
-          </p>
-          <div class="cta-row">
+          <p class="greeting reveal" id="greeting"></p>
+          <p class="eyebrow reveal">Software Engineering</p>
+          <h1 class="reveal">Waleed Al-Mehmadi</h1>
+          <p class="lead reveal">
+Junior Software Engineering student at King Fahd University of Petroleum & Minerals, specializing in Cybersecurity and Blockchain, with a strong interest in secure and scalable software systems.          </p>
+          <div class="cta-row reveal">
             <a class="btn primary" href="#projects">View Projects</a>
             <a class="btn ghost" href="#contact">Contact</a>
+            <a class="btn ghost" href="WALEED_AL-MEHMADI_Resume.pdf" target="_blank" rel="noopener noreferrer">Resume</a>
+            <a class="btn ghost" href="https://github.com/WaleedMehmadi" target="_blank" rel="noopener noreferrer">GitHub</a>
           </div>
-          
         </div>
-        <div class="hero-card">
-          <div class="card">
-            <h3>Profile Snapshot</h3>
-            <ul>
-              <li>B.Sc. Software Engineering Student</li>
-              <li>University: KFUPM</li>
-              <li>Expected Graduation: June 2027</li>
+
+        <div class="hero-photo reveal">
+          <img src="IMG_6523.jpeg" alt="Waleed Al-Mehmadi" />
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ═══ ABOUT ═══ -->
+    <section class="section" id="about">
+      <div class="container">
+        <h2 class="reveal">About</h2>
+        <div class="about-grid">
+
+          <div class="card about-card reveal">
+            <div class="about-card-header">
+              <div class="about-icon">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path fill="currentColor" d="M12 3 1 9l11 6 9-4.91V17h2V9L12 3ZM5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82Z"/>
+                </svg>
+              </div>
+              <h3>Education</h3>
+            </div>
+            <ul class="clean-list">
+              <li>B.Sc. Software Engineering</li>
+              <li>KFUPM — Dhahran</li>
+              <li>Graduating June 2027</li>
             </ul>
           </div>
-          <div class="card accent">
-            <h3>Career Goal</h3>
-            <p>Apply Java, HTML, OOP, and Agile skills in real projects.</p>
+
+          <div class="card about-card accent reveal">
+            <div class="about-card-header">
+              <div class="about-icon accent-icon">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path fill="currentColor" d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2Zm0 18a8 8 0 1 1 8-8 8 8 0 0 1-8 8Zm-1-5h2v2h-2Zm0-8h2v6h-2Z"/>
+                </svg>
+              </div>
+              <h3>Focus</h3>
+            </div>
+            <p>Focused on secure, scalable, and user-friendly software systems.</p>
           </div>
+
+          <div class="card about-card reveal">
+            <div class="about-card-header">
+              <div class="about-icon">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path fill="currentColor" d="M20 6h-2.18c.07-.26.18-.5.18-.78A2.22 2.22 0 0 0 15.78 3a2.34 2.34 0 0 0-1.94 1.06L12 6.88 10.16 4.06A2.34 2.34 0 0 0 8.22 3 2.22 2.22 0 0 0 6 5.22c0 .28.11.52.18.78H4a2 2 0 0 0-2 2v11a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2Z"/>
+                </svg>
+              </div>
+              <h3>Seeking</h3>
+            </div>
+            <p>Actively seeking summer training and internship opportunities for 2026.</p>
+          </div>
+
         </div>
       </div>
     </section>
 
-    <section class="section" id="objective">
-      <div class="container split">
-        <div>
-          <h2>Objective</h2>
-          <p>
-            Seeking a summer training opportunity to apply programming, object-oriented design, and foundational security concepts while contributing to real-world software development projects.
-          </p>
-          
-        </div>
-        <div class="card">
-          <h3>Certificates</h3>
-          <ul>
-            <li>Agile Methodology Certification - Edraak</li>
-          </ul>
-        </div>
-      </div>
-    </section>
 
+    <!-- ═══ SKILLS ═══ -->
     <section class="section" id="skills">
       <div class="container">
-        <h2>Skills</h2>
-        <!-- <p class="skills-intro">Core technical skills organized by focus area.</p> -->
-        <div class="skills-groups">
-          <article class="skill-group tone-languages">
-            <div class="skill-head">
-              <p class="skill-label">Programming Languages</p>
-            </div>
+        <h2 class="reveal">Skills</h2>
+        <div class="skills-list">
+
+          <div class="skill-row reveal">
+            <span class="skill-category">Languages</span>
             <div class="chip-grid">
               <span class="chip">Java</span>
               <span class="chip">Python</span>
               <span class="chip">JavaScript</span>
             </div>
-          </article>
-          <article class="skill-group tone-web">
-            <div class="skill-head">
-              <p class="skill-label">Web</p>
-            </div>
+          </div>
+
+          <div class="skill-row reveal">
+            <span class="skill-category">FRONTEND</span>
             <div class="chip-grid">
               <span class="chip">HTML</span>
               <span class="chip">CSS</span>
             </div>
-          </article>
-          <article class="skill-group tone-tools">
-            <div class="skill-head">
-              <p class="skill-label">Tools</p>
-            </div>
+          </div>
+
+          <div class="skill-row reveal">
+            <span class="skill-category">Tools</span>
             <div class="chip-grid">
               <span class="chip">Git</span>
+              <span class="chip">GitHub</span>
               <span class="chip">Figma</span>
             </div>
-          </article>
-          <article class="skill-group tone-concepts">
-            <div class="skill-head">
-              <p class="skill-label">Concepts</p>
-            </div>
+          </div>
+
+          <div class="skill-row reveal">
+            <span class="skill-category">CORE SKILLS</span>
             <div class="chip-grid">
               <span class="chip">OOP</span>
-              <span class="chip">Agile Methodology</span>
-              <span class="chip">Networking Fundamentals</span>
-              <span class="chip">Basic Security Principles</span>
+              <span class="chip">Agile</span>
+              <span class="chip">REST APIs</span>
+              <span class="chip">Networking</span>
+              <span class="chip">Basic Security</span>
               <span class="chip">Problem Solving</span>
               <span class="chip">Teamwork</span>
             </div>
-          </article>
+          </div>
+
         </div>
       </div>
     </section>
 
-    <!-- <section class="section" id="experience">
+    <!-- ═══ PROJECTS (tabbed) ═══ -->
+    <section class="section" id="projects">
       <div class="container">
-        <h2>Experience</h2>
-        <div class="timeline">
-          <div class="timeline-item">
-            <div class="time">2024</div>
-            <div class="content">
-              <h3>Academic Project - University Event Booking System</h3>
-              <p><em>King Fahd University of Petroleum and Minerals</em></p>
-              <p>Developed a Java-based application to manage university event reservations.</p>
-              <p>Implemented event creation, booking, and seat management using OOP principles.</p>
+        <h2 class="reveal">Projects</h2>
+
+        <!-- Tab buttons -->
+        <div class="tab-bar reveal" role="tablist">
+          <button
+            class="tab-btn active"
+            role="tab"
+            aria-selected="true"
+            aria-controls="tab-projects"
+            data-tab="projects"
+          >
+            <svg viewBox="0 0 24 24" aria-hidden="true" class="tab-icon">
+              <path fill="currentColor" d="M3 3h8v8H3V3Zm0 10h8v8H3v-8Zm10-10h8v8h-8V3Zm0 10h8v8h-8v-8Z"/>
+            </svg>
+            Projects
+          </button>
+          <button
+            class="tab-btn"
+            role="tab"
+            aria-selected="false"
+            aria-controls="tab-certificates"
+            data-tab="certificates"
+          >
+            <svg viewBox="0 0 24 24" aria-hidden="true" class="tab-icon">
+              <path fill="currentColor" d="M12 1L9.5 8.5H2l6 4.5-2.5 7.5L12 16l6.5 4.5L16 13l6-4.5h-7.5L12 1Z"/>
+            </svg>
+            Certificates
+          </button>
+        </div>
+
+        <!-- Projects panel -->
+        <div class="tab-panel" id="tab-projects" role="tabpanel">
+          <div class="project-grid">
+
+            <article class="card project reveal">
+              <h3>University Event Booking System</h3>
+              <p>Java application for managing university event reservations — event creation, booking, and seat management built on OOP principles.</p>
+              <div class="tags">
+                <span>Java</span>
+                <span>OOP</span>
+              </div>
+              <div class="project-action">
+                <a
+                  href="https://github.com/WaleedMehmadi/university-event-booking-system"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="demo-btn"
+                >View on GitHub</a>
+              </div>
+            </article>
+
+            <article class="card project reveal">
+              <h3>Restaurant Ordering Application</h3>
+              <p>Restaurant ordering prototype with interactive user flows in Figma, focused on intuitive navigation and clean visual hierarchy.</p>
+              <div class="tags">
+                <span>Figma</span>
+                <span>UI/UX</span>
+              </div>
+              <div class="project-action">
+                <a
+                  href="https://www.figma.com/design/SFLIt6O0KK2ewhOzhrOKGB/eative-food-delivery-app--Community---Copy-?node-id=824-1221&p=f&t=yCIzEuO8gTscW2vL-0"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="demo-btn"
+                >View Prototype</a>
+              </div>
+            </article>
+
+          </div>
+        </div>
+
+        <!-- Certificates panel -->
+        <div class="tab-panel hidden" id="tab-certificates" role="tabpanel">
+          <div class="cert-grid">
+
+            <div class="card cert-card reveal">
+              <div class="cert-badge">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path fill="currentColor" d="M12 1L9.5 8.5H2l6 4.5-2.5 7.5L12 16l6.5 4.5L16 13l6-4.5h-7.5L12 1Z"/>
+                </svg>
+              </div>
+              <div class="cert-info">
+                <p class="cert-label">Certification</p>
+                <h3>Agile Methodology</h3>
+                <p class="cert-issuer">Issued by Edraak</p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ═══ GITHUB REPOS ═══ -->
+    <section class="section" id="github">
+      <div class="container">
+
+        <div class="github-header reveal">
+          <h2>GitHub</h2>
+          <div class="sort-wrap">
+            <span class="sort-label">Sort</span>
+            <div class="sort-tabs" role="group" aria-label="Sort repositories">
+              <button class="sort-btn active" data-sort="pushed">Recent</button>
+              <button class="sort-btn" data-sort="created">Newest</button>
+              <button class="sort-btn" data-sort="updated">Updated</button>
+            </div>
+          </div>
+        </div>
+
+        <div id="repo-loading" class="repo-grid hidden" aria-label="Loading repositories"></div>
+
+        <div id="repo-error" class="repo-error hidden">
+          <p>Could not load repositories. Check your connection or view them directly.</p>
+          <a href="https://github.com/WaleedMehmadi" target="_blank" rel="noopener noreferrer" class="demo-btn">View on GitHub</a>
+        </div>
+
+        <div id="repo-grid" class="repo-grid hidden"></div>
+
+        <div class="repo-footer reveal">
+          <a href="https://github.com/WaleedMehmadi" target="_blank" rel="noopener noreferrer" class="btn ghost">View all repositories on GitHub</a>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ═══ EDUCATION ═══ -->
+    <section class="section" id="education">
+      <div class="container">
+        <h2 class="reveal">Education</h2>
+        <div class="card reveal">
+          <div class="edu-header">
+            <div>
+              <h3>Bachelor of Science in Software Engineering</h3>
+              <p class="edu-institution">King Fahd University of Petroleum and Minerals</p>
+            </div>
+            <div class="edu-meta">
+              <span>Aug 2022 — Jun 2027</span>
+              <span>Dhahran, Saudi Arabia</span>
+            </div>
+          </div>
+          <div class="edu-courses">
+            <p class="edu-courses-label">Relevant Coursework</p>
+            <div class="chip-grid">
+              <span class="chip">Data Structures & Algorithms</span>
+              <span class="chip">OOP</span>
+              <span class="chip">Database Systems</span>
+              <span class="chip">Software Engineering</span>
+              <span class="chip">Computer Networks</span>
+              <span class="chip">Artificial Intelligence</span>
+              <span class="chip">Cybersecurity Fundamentals</span>
             </div>
           </div>
         </div>
       </div>
-    </section> -->
-
-    <section class="section" id="projects">
-      <div class="container">
-        <h2>Projects</h2>
-        <div class="project-grid">
-          <article class="card project">
-            <h3>University Event Booking System (Java)</h3>
-            <p>Designed and implemented a Java application for managing university event reservations.</p>
-            <div class="tags">
-              <span>Java</span>
-              <span>OOP</span>
-            
-            </div>
-          </article>
-          <article class="card project">
-            <h3>Figma Project - Restaurant Ordering Application</h3>
-            <p>Designed a restaurant ordering prototype and interactive user flows in Figma.</p>
-            <div class="tags">
-              <span>Figma</span>
-              <span>UI/UX</span>
-            </div>
-            <div class="project-action">
-              <a href="https://www.figma.com/proto/PANv7mBSfnQLidIhsKZ9Uz/eative-food-delivery-app--Community-?node-id=1264-1437&t=MwBD2bwjFwSL0x3p-1" target="_blank" rel="noopener noreferrer" class="demo-btn">View Prototype</a>
-            </div>
-          </article>
-        </div>
-      </div>
     </section>
 
-    <section class="section" id="education">
-      <div class="container">
-        <h2>Education</h2>
-        <div class="card">
-          <h3>Bachelor of Science in Software Engineering</h3>
-          <p><em>King Fahd University of Petroleum and Minerals</em></p>
-          <p>08/2022 - 06/2027</p>
-          <p>Dhahran, Eastern Province</p>
-        </div>
-      </div>
-    </section>
-
+    <!-- ═══ CONTACT ═══ -->
     <section class="section" id="contact">
       <div class="container">
-        <h2>Contact</h2>
+        <h2 class="reveal">Contact</h2>
         <div class="contact-grid">
-          <div>
-            <!-- <p>Reach out for internships, collaboration, or opportunities:</p> -->
-            <ul class="contact-list">
-              <li>
-                <span class="contact-item">
+
+          <ul class="contact-list reveal">
+            <li>
+              <span class="contact-item">
+                <span class="contact-icon-wrap">
                   <svg class="contact-icon" viewBox="0 0 24 24" aria-hidden="true">
                     <path fill="currentColor" d="M4 5h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2Zm0 2v.51l8 5.34 8-5.34V7H4Zm16 10V9.92l-7.45 4.98a1 1 0 0 1-1.1 0L4 9.92V17h16Z"/>
                   </svg>
-                  <span>Email: <a href="mailto:waleedalmehmadi1@gmail.com">waleedalmehmadi1@gmail.com</a></span>
                 </span>
-              </li>
-              <li>
-                <span class="contact-item">
+                <a href="mailto:waleedalmehmadi1@gmail.com">waleedalmehmadi1@gmail.com</a>
+              </span>
+            </li>
+            <li>
+              <span class="contact-item">
+                <span class="contact-icon-wrap">
                   <svg class="contact-icon" viewBox="0 0 24 24" aria-hidden="true">
-                    <path fill="currentColor" d="M6.62 10.79a15.46 15.46 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.02-.24 11.2 11.2 0 0 0 3.52.56 1 1 0 0 1 1 1V21a1 1 0 0 1-1 1A17.93 17.93 0 0 1 2 4a1 1 0 0 1 1-1h4.5a1 1 0 0 1 1 1 11.2 11.2 0 0 0 .56 3.52 1 1 0 0 1-.24 1.02l-2.2 2.25Z"/>
+                    <path fill="currentColor" d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.009-.868-.013-1.703-2.782.604-3.369-1.341-3.369-1.341-.454-1.154-1.11-1.462-1.11-1.462-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0 1 12 6.836a9.59 9.59 0 0 1 2.504.337c1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.202 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.163 22 16.418 22 12c0-5.523-4.477-10-10-10Z"/>
                   </svg>
-                  <span>Phone: <a href="tel:+966538353292">+966 53 835 3292</a></span>
                 </span>
-              </li>
-              <li>
-                <span class="contact-item">
-                  <svg class="contact-icon" viewBox="0 0 24 24" aria-hidden="true">
-                    <path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7Zm0 9.5A2.5 2.5 0 1 1 12 6a2.5 2.5 0 0 1 0 5.5Z"/>
-                  </svg>
-                  <span>Location: Al-Khobar</span>
-                </span>
-              </li>
-              <li>
-                <span class="contact-item">
+                <a href="https://github.com/WaleedMehmadi" target="_blank" rel="noopener noreferrer">github.com/WaleedMehmadi</a>
+              </span>
+            </li>
+            <li>
+              <span class="contact-item">
+                <span class="contact-icon-wrap">
                   <svg class="contact-icon" viewBox="0 0 24 24" aria-hidden="true">
                     <path fill="currentColor" d="M6.94 8.5A1.56 1.56 0 1 1 6.94 5.38a1.56 1.56 0 0 1 0 3.12ZM5.5 9.75h2.88V19H5.5V9.75Zm4.69 0h2.76v1.26h.04a3.03 3.03 0 0 1 2.72-1.5c2.9 0 3.44 1.9 3.44 4.37V19h-2.88v-4.53c0-1.08-.02-2.47-1.5-2.47-1.5 0-1.73 1.17-1.73 2.39V19h-2.85V9.75Z"/>
                   </svg>
-                  <a href="https://www.linkedin.com/in/waleed-al-mehmadi-9793302b5" target="_blank" rel="noopener noreferrer">LinkedIn: Waleed Al-Mehmadi</a>
                 </span>
-              </li>
+                <a href="https://www.linkedin.com/in/waleed-al-mehmadi-9793302b5" target="_blank" rel="noopener noreferrer">Waleed Al-Mehmadi</a>
+              </span>
+            </li>
+            <li>
+              <span class="contact-item">
+                <span class="contact-icon-wrap">
+                  <svg class="contact-icon" viewBox="0 0 24 24" aria-hidden="true">
+                    <path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7Zm0 9.5A2.5 2.5 0 1 1 12 6a2.5 2.5 0 0 1 0 5.5Z"/>
+                  </svg>
+                </span>
+                <span>Al-Khobar, Saudi Arabia</span>
+              </span>
+            </li>
+          </ul>
+
+          <div class="card lang-card reveal">
+            <h3>Languages</h3>
+            <ul class="lang-list">
+              <li><span class="lang-name">Arabic</span><span class="lang-level">Native</span></li>
+              <li><span class="lang-name">English</span><span class="lang-level">Proficient</span></li>
             </ul>
           </div>
-          <div class="card">
-            <h3>Languages</h3>
-            <p>Arabic - Native</p>
-            <p>English - Proficient</p>
-          </div>
+
         </div>
       </div>
     </section>
+
   </main>
 
   <footer class="footer">
-    <div class="container">
-      <span>&copy; 2026 Waleed Al-Mehmadi. All rights reserved.</span>
+    <div class="container footer-inner">
+      <span>&copy; 2026 Waleed Al-Mehmadi</span>
     </div>
   </footer>
 
