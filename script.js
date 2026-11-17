@@ -1,4 +1,4 @@
-/* ── Theme toggle ───────────────────────────────────── */
+// #theme
 const root        = document.documentElement;
 const themeToggle = document.getElementById('themeToggle');
 
@@ -9,7 +9,7 @@ themeToggle.addEventListener('click', () => {
   localStorage.setItem('theme', next);
 });
 
-/* ── Greeting ────────────────────────────────────────── */
+// #greeting
 (function () {
   const hour = new Date().getHours();
   let text;
@@ -21,7 +21,7 @@ themeToggle.addEventListener('click', () => {
   if (el) el.textContent = text;
 })();
 
-/* ── Nav toggle ─────────────────────────────────────── */
+// #navigation
 const nav = document.getElementById('nav');
 const navToggle = document.getElementById('navToggle');
 const navLinks = nav.querySelectorAll('a');
@@ -36,7 +36,7 @@ navLinks.forEach(link => link.addEventListener('click', () => {
   navToggle.setAttribute('aria-expanded', 'false');
 }));
 
-/* ── Reveal on scroll ───────────────────────────────── */
+// #reveal
 const revealEls = document.querySelectorAll('.reveal');
 
 const revealObserver = new IntersectionObserver(
@@ -51,14 +51,14 @@ const revealObserver = new IntersectionObserver(
   { threshold: 0.08, rootMargin: '0px 0px -28px 0px' }
 );
 
-// Hero elements stagger: eyebrow → h1 → lead → buttons
+// #hero
 document.querySelectorAll('.hero .reveal').forEach((el, i) => {
   el.style.transitionDelay = `${i * 100}ms`;
 });
 
 revealEls.forEach(el => revealObserver.observe(el));
 
-/* ── Portfolio tabs ─────────────────────────────────── */
+// #tabs
 const tabBtns = document.querySelectorAll('.tab-btn');
 const tabPanels = document.querySelectorAll('.tab-panel');
 
@@ -78,7 +78,7 @@ tabBtns.forEach(btn => {
   });
 });
 
-/* ── Active nav link on scroll ──────────────────────── */
+// #active-section
 const sections = document.querySelectorAll('main section[id]');
 
 const setActive = () => {
@@ -96,9 +96,28 @@ const setActive = () => {
 window.addEventListener('scroll', setActive, { passive: true });
 setActive();
 
-/* ── GitHub Repos ───────────────────────────────────── */
+// #github
 const GITHUB_USER = 'WaleedMehmadi';
 const REPO_PER_PAGE = 6;
+const REPO_CACHE_TTL = 15 * 60 * 1000;
+let repoRequestId = 0;
+let repoRetryTimer;
+
+function readRepoStorage(key) {
+  try {
+    return JSON.parse(localStorage.getItem(`github:${GITHUB_USER}:${key}`));
+  } catch {
+    return null;
+  }
+}
+
+function writeRepoStorage(key, value) {
+  try {
+    localStorage.setItem(`github:${GITHUB_USER}:${key}`, JSON.stringify(value));
+  } catch {}
+}
+
+let repoRetryAt = Number(readRepoStorage('retry-at')) || 0;
 
 const LANG_COLORS = {
   JavaScript:  '#f1e05a',
@@ -169,42 +188,129 @@ function buildRepoCard(repo) {
   `;
 }
 
+function renderRepos(repos) {
+  const grid = document.getElementById('repo-grid');
+  const error = document.getElementById('repo-error');
+
+  grid.innerHTML = repos.map(buildRepoCard).join('');
+  grid.classList.toggle('hidden', repos.length === 0);
+  error.classList.toggle('hidden', repos.length > 0);
+  if (!repos.length) error.querySelector('p').textContent = 'No public repositories found.';
+
+  grid.querySelectorAll('.repo-card').forEach((card, i) => {
+    card.style.animationDelay = `${i * 60}ms`;
+    card.classList.add('reveal', 'visible');
+  });
+}
+
+function repoLimitMessage() {
+  const time = new Date(repoRetryAt).toLocaleTimeString('en', { hour: 'numeric', minute: '2-digit' });
+  return `GitHub's request limit has been reached. Try again after ${time}, or view the repositories directly.`;
+}
+
+function updateRepoRetry() {
+  const retry = document.getElementById('repoRetry');
+  clearTimeout(repoRetryTimer);
+  retry.disabled = repoRetryAt > Date.now();
+  if (retry.disabled) {
+    repoRetryTimer = setTimeout(updateRepoRetry, repoRetryAt - Date.now());
+  }
+}
+
 async function loadRepos(sort = 'pushed') {
+  const requestId = ++repoRequestId;
   const loading = document.getElementById('repo-loading');
   const grid    = document.getElementById('repo-grid');
   const error   = document.getElementById('repo-error');
+  const status  = document.getElementById('repo-status');
+  const stored  = readRepoStorage(sort);
+  const cached  = stored && Number.isFinite(stored.savedAt) && Array.isArray(stored.repos) &&
+    stored.repos.every(repo => repo && typeof repo.name === 'string' && typeof repo.html_url === 'string')
+    ? stored : null;
+  const hasSavedRepos = cached && cached.repos.length > 0;
 
-  loading.innerHTML = buildSkeletons();
-  loading.classList.remove('hidden');
+  loading.classList.add('hidden');
   grid.classList.add('hidden');
   error.classList.add('hidden');
+  status.classList.add('hidden');
+  updateRepoRetry();
+
+  if (cached) {
+    renderRepos(cached.repos);
+    if (Date.now() - cached.savedAt < REPO_CACHE_TTL) return;
+  }
+
+  const showFailure = message => {
+    loading.classList.add('hidden');
+    if (hasSavedRepos) {
+      status.textContent = 'Showing saved repositories. Live updates are temporarily unavailable.';
+      status.classList.remove('hidden');
+    } else {
+      error.querySelector('p').textContent = message;
+      error.classList.remove('hidden');
+    }
+    updateRepoRetry();
+  };
+
+  if (repoRetryAt > Date.now()) {
+    showFailure(repoLimitMessage());
+    return;
+  }
+
+  if (!hasSavedRepos) {
+    error.classList.add('hidden');
+    loading.innerHTML = buildSkeletons();
+    loading.classList.remove('hidden');
+  }
+
+  let errorMessage = 'Could not load repositories. Please try again or view them directly.';
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), 10000);
 
   try {
     const url = `https://api.github.com/users/${GITHUB_USER}/repos?sort=${sort}&per_page=${REPO_PER_PAGE}&type=public`;
-    const res  = await fetch(url, { headers: { Accept: 'application/vnd.github+json' } });
-    if (!res.ok) throw new Error(`${res.status}`);
-    const repos = await res.json();
+    const res  = await fetch(url, {
+      headers: { Accept: 'application/vnd.github+json' },
+      signal: controller.signal
+    });
+    if (requestId !== repoRequestId) return;
 
-    loading.classList.add('hidden');
+    if (!res.ok) {
+      const body = await res.json().catch(() => ({}));
+      if (requestId !== repoRequestId) return;
+      const rateLimited = (res.status === 403 || res.status === 429) &&
+        (res.headers.get('x-ratelimit-remaining') === '0' || res.status === 429 || /rate limit/i.test(body.message || ''));
 
-    if (!repos.length) {
-      error.querySelector('p').textContent = 'No public repositories found.';
-      error.classList.remove('hidden');
-      return;
+      if (rateLimited) {
+        const retryAfter = Number(res.headers.get('retry-after')) * 1000;
+        const reset = res.headers.get('x-ratelimit-remaining') === '0'
+          ? Number(res.headers.get('x-ratelimit-reset')) * 1000 : 0;
+        repoRetryAt = Math.max(Date.now() + (retryAfter || 60000), reset + 1000);
+        writeRepoStorage('retry-at', repoRetryAt);
+        errorMessage = repoLimitMessage();
+      } else if (res.status === 404) {
+        errorMessage = 'This GitHub account could not be found. View the profile directly or try again later.';
+      }
+      throw new Error(String(res.status));
     }
 
-    grid.innerHTML = repos.map(buildRepoCard).join('');
-    grid.classList.remove('hidden');
+    const repos = await res.json();
+    if (requestId !== repoRequestId) return;
+    if (!Array.isArray(repos)) throw new Error('Invalid repository response');
 
-    grid.querySelectorAll('.repo-card').forEach((card, i) => {
-      card.style.animationDelay = `${i * 60}ms`;
-      card.classList.add('reveal', 'visible');
-    });
-  } catch {
+    writeRepoStorage(sort, { repos, savedAt: Date.now() });
     loading.classList.add('hidden');
-    error.classList.remove('hidden');
+    renderRepos(repos);
+  } catch {
+    if (requestId === repoRequestId) showFailure(errorMessage);
+  } finally {
+    clearTimeout(timeout);
   }
 }
+
+document.getElementById('repoRetry').addEventListener('click', () => {
+  loadRepos(document.querySelector('.sort-btn.active').dataset.sort);
+});
 
 document.querySelectorAll('.sort-btn').forEach(btn => {
   btn.addEventListener('click', () => {

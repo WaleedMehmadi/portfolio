@@ -1,4 +1,4 @@
-/* ─── Tokens ─────────────────────────────────────────── */
+/* #colors */
 :root {
   --bg:       #f4f6fb;
   --bg-soft:  #eef2f9;
@@ -12,7 +12,7 @@
   --radius:   18px;
 }
 
-/* ─── Reset ──────────────────────────────────────────── */
+/* #base */
 *, *::before, *::after {
   box-sizing: border-box;
   margin: 0;
@@ -41,7 +41,7 @@ ul {
   list-style: none;
 }
 
-/* ─── Utility ────────────────────────────────────────── */
+/* #layout */
 .container {
   width: min(1100px, 92%);
   margin: 0 auto;
@@ -70,7 +70,7 @@ ul {
   top: 0;
 }
 
-/* ─── Background orbs ────────────────────────────────── */
+/* #background */
 .bg-orb {
   position: fixed;
   width: 460px;
@@ -94,7 +94,7 @@ ul {
   right: -120px;
 }
 
-/* ─── Header / Nav ───────────────────────────────────── */
+/* #navigation */
 .site-header {
   position: sticky;
   top: 0;
@@ -201,11 +201,7 @@ ul {
   transition: transform 0.25s, opacity 0.25s;
 }
 
-/* ─── Hero ───────────────────────────────────────────── */
-/*
-  Single-column, left-aligned. The name is large and the
-  lead sentence sits under it. No side cards — those live
-  in the About section below. */
+/* #hero */
 
 .hero {
   padding: 110px 0 90px;
@@ -260,7 +256,7 @@ ul {
   margin-top: 32px;
 }
 
-/* ─── Hero photo ─────────────────────────────────────── */
+/* #photo */
 .hero-photo {
   position: relative;
   width: 290px;
@@ -280,7 +276,7 @@ ul {
   display: block;
 }
 
-/* ─── Buttons ────────────────────────────────────────── */
+/* #buttons */
 .btn {
   padding: 11px 24px;
   border-radius: 999px;
@@ -319,7 +315,7 @@ ul {
   transform: translateY(-2px);
 }
 
-/* ─── Cards (global) ─────────────────────────────────── */
+/* #cards */
 .card {
   background: var(--card);
   padding: 22px 24px;
@@ -344,7 +340,7 @@ ul {
   line-height: 1.65;
 }
 
-/* ─── About section ──────────────────────────────────── */
+/* #about */
 .about-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -412,7 +408,7 @@ ul {
   line-height: 1.65;
 }
 
-/* ─── Portfolio tabs ─────────────────────────────────── */
+/* #tabs */
 .tab-bar {
   display: flex;
   gap: 8px;
@@ -469,7 +465,7 @@ ul {
   to   { opacity: 1; transform: translateY(0); }
 }
 
-/* ─── Certificates ───────────────────────────────────── */
+/* #certificates */
 .cert-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(420px, 1fr));
@@ -535,7 +531,7 @@ ul {
   letter-spacing: 0.3px;
 }
 
-/* ─── Sections ───────────────────────────────────────── */
+/* #sections */
 .section {
   padding: 80px 0;
 }
@@ -545,7 +541,7 @@ ul {
   margin-bottom: 28px;
 }
 
-/* ─── Objective ──────────────────────────────────────── */
+/* #objective */
 .objective-block {
   max-width: 680px;
 }
@@ -560,7 +556,7 @@ ul {
   line-height: 1.8;
 }
 
-/* ─── Skills ─────────────────────────────────────────── */
+/* #skills */
 .skills-list {
   display: flex;
   flex-direction: column;
@@ -614,7 +610,51 @@ ul {
   transform: translateY(-2px);
 }
 
-/* ─── Projects ───────────────────────────────────────── */
+/* #experience */
+.experience-card {
+  border-top: 3px solid var(--accent);
+}
+
+.experience-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 12px 24px;
+}
+
+.experience-header h3 {
+  font-size: 22px;
+  margin-bottom: 6px;
+}
+
+.experience-header .experience-company {
+  color: var(--ink);
+  font-weight: 500;
+}
+
+.experience-period {
+  padding-top: 4px;
+}
+
+.experience-highlights {
+  display: grid;
+  gap: 10px;
+  margin-top: 20px;
+  padding: 18px 0 0 20px;
+  border-top: 1px solid var(--line);
+  list-style: disc;
+}
+
+.experience-highlights li {
+  padding-left: 4px;
+}
+
+.experience-highlights li::marker {
+  color: var(--accent);
+}
+
+/* #projects */
 .project-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -645,6 +685,36 @@ ul {
   font-size: 14px;
   color: var(--muted);
   line-height: 1.7;
+}
+
+.project-header {
+  display: flex;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 10px 12px;
+}
+
+.project-header h3 {
+  flex: 1 1 220px;
+}
+
+.card.project .project-header h3 {
+  margin-bottom: 0;
+}
+
+.project-type {
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: var(--bg-soft);
+  color: var(--accent);
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.card.project .project-context {
+  flex: none;
+  margin: 10px 0;
+  font-size: 12px;
 }
 
 .tags {
@@ -690,7 +760,7 @@ ul {
   border-color: var(--ink);
 }
 
-/* ─── Education ──────────────────────────────────────── */
+/* #education */
 .edu-header {
   display: flex;
   justify-content: space-between;
@@ -740,7 +810,22 @@ ul {
   margin-bottom: 12px;
 }
 
-/* ─── Contact ────────────────────────────────────────── */
+.edu-course-category {
+  margin-bottom: 10px;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1.4px;
+  color: var(--muted);
+}
+
+.edu-course-group + .edu-course-group {
+  margin-top: 22px;
+  padding-top: 18px;
+  border-top: 1px solid var(--line);
+}
+
+/* #contact */
 .contact-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -850,7 +935,7 @@ ul {
   border-radius: 999px;
 }
 
-/* ─── GitHub Repos ───────────────────────────────────── */
+/* #github */
 .github-header {
   display: flex;
   align-items: center;
@@ -1005,7 +1090,7 @@ ul {
   white-space: nowrap;
 }
 
-/* Skeleton loading */
+/* #loading */
 .repo-skeleton {
   background: var(--card);
   border-radius: var(--radius);
@@ -1050,12 +1135,37 @@ ul {
   font-size: 14px;
 }
 
+.repo-error-actions {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.repo-error-actions button {
+  font-family: inherit;
+  line-height: inherit;
+  cursor: pointer;
+}
+
+.repo-error-actions button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.repo-status {
+  margin-top: 16px;
+  color: var(--muted);
+  font-size: 13px;
+  text-align: center;
+}
+
 .repo-footer {
   margin-top: 36px;
   text-align: center;
 }
 
-/* ─── Footer ─────────────────────────────────────────── */
+/* #footer */
 .footer {
   padding: 28px 0 36px;
   border-top: 1px solid var(--line);
@@ -1071,7 +1181,7 @@ ul {
   gap: 8px;
 }
 
-/* ─── Reveal animation ───────────────────────────────── */
+/* #animations */
 .reveal {
   opacity: 0;
   transform: translateY(16px);
@@ -1083,7 +1193,7 @@ ul {
   transform: translateY(0);
 }
 
-/* ─── Dark mode ──────────────────────────────────────── */
+/* #dark-mode */
 [data-theme="dark"] {
   --bg:       #0e1117;
   --bg-soft:  #141822;
@@ -1204,7 +1314,7 @@ ul {
   border-top-color: rgba(255, 255, 255, 0.07);
 }
 
-/* ─── Responsive: tablet ─────────────────────────────── */
+/* #tablet */
 @media (max-width: 900px) {
   .hero {
     padding: 80px 0 64px;
@@ -1240,7 +1350,7 @@ ul {
   }
 }
 
-/* ─── Responsive: mobile ─────────────────────────────── */
+/* #mobile */
 @media (max-width: 760px) {
   .nav {
     position: absolute;
@@ -1286,7 +1396,7 @@ ul {
   }
 }
 
-/* ─── Responsive: small mobile ──────────────────────── */
+/* #small-mobile */
 @media (max-width: 500px) {
   .cta-row {
     display: grid;

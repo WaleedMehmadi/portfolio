@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -24,9 +24,10 @@
   <link rel="stylesheet" href="style.css" />
   <script>
     (function(){
-      const t = localStorage.getItem('theme') ||
-        (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-      if (t === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
+      try {
+        const t = localStorage.getItem('theme') || 'dark';
+        document.documentElement.setAttribute('data-theme', t === 'light' ? 'light' : 'dark');
+      } catch {}
     })();
   </script>
 </head>
@@ -38,9 +39,10 @@
 
   <header class="site-header" id="top">
     <div class="container nav-wrap">
-      <a class="logo" href="#top">Waleed A.</a>
+      <a class="logo" href="#top">W.Almehmadi</a>
       <nav class="nav" id="nav" aria-label="Primary navigation">
         <a href="#about">About</a>
+        <a href="#experience">Experience</a>
         <a href="#skills">Skills</a>
         <a href="#projects">Projects</a>
         <a href="#github">GitHub</a>
@@ -74,7 +76,7 @@
 
   <main id="main">
 
-    <!-- ═══ HERO ═══ -->
+    <!-- Hero section -->
     <section class="hero">
       <div class="container hero-grid">
 
@@ -82,12 +84,11 @@
           <p class="greeting reveal" id="greeting"></p>
           <p class="eyebrow reveal">Software Engineering</p>
           <h1 class="reveal">Waleed Al-Mehmadi</h1>
-          <p class="lead reveal">
-Junior Software Engineering student at King Fahd University of Petroleum & Minerals, specializing in Cybersecurity and Blockchain, with a strong interest in secure and scalable software systems.          </p>
+          <p class="lead reveal"> Software Engineering student at KFUPM with experience in cybersecurity through an industry internship at Saudi Energy. Interested in software engineering, cybersecurity, and secure software development. </p>
           <div class="cta-row reveal">
             <a class="btn primary" href="#projects">View Projects</a>
             <a class="btn ghost" href="#contact">Contact</a>
-            <a class="btn ghost" href="WALEED_AL-MEHMADI_Resume.pdf" target="_blank" rel="noopener noreferrer">Resume</a>
+            <a class="btn ghost hidden" href="WALEED_AL-MEHMADI_Resume.pdf" target="_blank" rel="noopener noreferrer">Resume</a>
             <a class="btn ghost" href="https://github.com/WaleedMehmadi" target="_blank" rel="noopener noreferrer">GitHub</a>
           </div>
         </div>
@@ -99,7 +100,7 @@ Junior Software Engineering student at King Fahd University of Petroleum & Miner
       </div>
     </section>
 
-    <!-- ═══ ABOUT ═══ -->
+    <!-- About section -->
     <section class="section" id="about">
       <div class="container">
         <h2 class="reveal">About</h2>
@@ -128,9 +129,13 @@ Junior Software Engineering student at King Fahd University of Petroleum & Miner
                   <path fill="currentColor" d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2Zm0 18a8 8 0 1 1 8-8 8 8 0 0 1-8 8Zm-1-5h2v2h-2Zm0-8h2v6h-2Z"/>
                 </svg>
               </div>
-              <h3>Focus</h3>
+              <h3>Interests</h3>
             </div>
-            <p>Focused on secure, scalable, and user-friendly software systems.</p>
+            <ul class="clean-list">
+              <li>Software Engineering </li>
+              <li>Cybersecurity</li>
+              <li>Secure software development</li>
+            </ul>
           </div>
 
           <div class="card about-card reveal">
@@ -140,24 +145,48 @@ Junior Software Engineering student at King Fahd University of Petroleum & Miner
                   <path fill="currentColor" d="M20 6h-2.18c.07-.26.18-.5.18-.78A2.22 2.22 0 0 0 15.78 3a2.34 2.34 0 0 0-1.94 1.06L12 6.88 10.16 4.06A2.34 2.34 0 0 0 8.22 3 2.22 2.22 0 0 0 6 5.22c0 .28.11.52.18.78H4a2 2 0 0 0-2 2v11a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2Z"/>
                 </svg>
               </div>
-              <h3>Seeking</h3>
+              <h3>Experience</h3>
             </div>
-            <p>Actively seeking summer training and internship opportunities for 2026.</p>
+            <ul class="clean-list">
+              <li>Cybersecurity Intern at Saudi Energy</li>
+              <li>Summer 2026</li>
+            </ul>
           </div>
 
         </div>
       </div>
     </section>
 
+    <!-- Experience section -->
+    <section class="section" id="experience">
+      <div class="container">
+        <h2 class="reveal">Experience</h2>
+        <article class="card experience-card reveal">
+          <div class="experience-header">
+            <div>
+              <h3>Cybersecurity Intern</h3>
+              <p class="experience-company">Saudi Energy | Riyadh, Saudi Arabia</p>
+            </div>
+            <p class="experience-period"><time datetime="2026-06">June 2026</time> – <time datetime="2026-08">August 2026</time></p>
+          </div>
+          <ul class="experience-highlights">
+            <li>Completed an 8-week rotational training program covering cybersecurity operations, vulnerability management, governance, risk management, and IT security.</li>
+            <li>Gained exposure to security monitoring and incident investigation processes.</li>
+            <li>Developed an understanding of vulnerability management, security design, and industrial cybersecurity concepts.</li>
+            <li>Designed and documented a conceptual Application Security Assessment Workflow using requirements analysis and UML diagrams.</li>
+          </ul>
+        </article>
+      </div>
+    </section>
 
-    <!-- ═══ SKILLS ═══ -->
+    <!-- Skills section -->
     <section class="section" id="skills">
       <div class="container">
         <h2 class="reveal">Skills</h2>
         <div class="skills-list">
 
           <div class="skill-row reveal">
-            <span class="skill-category">Languages</span>
+            <span class="skill-category">Programming Languages</span>
             <div class="chip-grid">
               <span class="chip">Java</span>
               <span class="chip">Python</span>
@@ -166,40 +195,42 @@ Junior Software Engineering student at King Fahd University of Petroleum & Miner
           </div>
 
           <div class="skill-row reveal">
-            <span class="skill-category">FRONTEND</span>
-            <div class="chip-grid">
-              <span class="chip">HTML</span>
-              <span class="chip">CSS</span>
-            </div>
-          </div>
-
-          <div class="skill-row reveal">
-            <span class="skill-category">Tools</span>
-            <div class="chip-grid">
-              <span class="chip">Git</span>
-              <span class="chip">GitHub</span>
-              <span class="chip">Figma</span>
-            </div>
-          </div>
-
-          <div class="skill-row reveal">
-            <span class="skill-category">CORE SKILLS</span>
+            <span class="skill-category">Software Development</span>
             <div class="chip-grid">
               <span class="chip">OOP</span>
-              <span class="chip">Agile</span>
+              <span class="chip">HTML</span>
+              <span class="chip">CSS</span>
               <span class="chip">REST APIs</span>
-              <span class="chip">Networking</span>
-              <span class="chip">Basic Security</span>
-              <span class="chip">Problem Solving</span>
-              <span class="chip">Teamwork</span>
+              <span class="chip">Git</span>
+              <span class="chip">GitHub</span>
             </div>
           </div>
+
+          <div class="skill-row reveal">
+            <span class="skill-category">Cybersecurity Knowledge</span>
+            <div class="chip-grid">
+              <span class="chip">Security Fundamentals</span>
+              <span class="chip">Networking</span>
+              <span class="chip">Secure SDLC</span>
+              <span class="chip">Vulnerability Management Concepts</span>
+            </div>
+          </div>
+
+          <div class="skill-row reveal">
+            <span class="skill-category">Tools & Design</span>
+            <div class="chip-grid">
+              <span class="chip">Figma</span>
+              <span class="chip">Requirements Analysis</span>
+              <span class="chip">UML Diagrams</span>
+            </div>
+          </div>
+
 
         </div>
       </div>
     </section>
 
-    <!-- ═══ PROJECTS (tabbed) ═══ -->
+    <!-- Projects section -->
     <section class="section" id="projects">
       <div class="container">
         <h2 class="reveal">Projects</h2>
@@ -232,9 +263,23 @@ Junior Software Engineering student at King Fahd University of Petroleum & Miner
           </button>
         </div>
 
-        <!-- Projects panel -->
+        <!-- Project cards -->
         <div class="tab-panel" id="tab-projects" role="tabpanel">
           <div class="project-grid">
+
+            <article class="card project reveal">
+              <div class="project-header">
+                <h3>Application Security Assessment Workflow</h3>
+                <span class="project-type">Design Project</span>
+              </div>
+              <p class="project-context">Software Engineering · Summer Training Project</p>
+              <p>Designed a conceptual application security assessment workflow using requirements analysis, process documentation, and UML diagrams.</p>
+              <div class="tags">
+                <span>Requirements Analysis</span>
+                <span>UML</span>
+                <span>Application Security</span>
+              </div>
+            </article>
 
             <article class="card project reveal">
               <h3>University Event Booking System</h3>
@@ -273,7 +318,7 @@ Junior Software Engineering student at King Fahd University of Petroleum & Miner
           </div>
         </div>
 
-        <!-- Certificates panel -->
+        <!-- Certificates -->
         <div class="tab-panel hidden" id="tab-certificates" role="tabpanel">
           <div class="cert-grid">
 
@@ -296,7 +341,7 @@ Junior Software Engineering student at King Fahd University of Petroleum & Miner
       </div>
     </section>
 
-    <!-- ═══ GITHUB REPOS ═══ -->
+    <!-- GitHub section -->
     <section class="section" id="github">
       <div class="container">
 
@@ -314,12 +359,16 @@ Junior Software Engineering student at King Fahd University of Petroleum & Miner
 
         <div id="repo-loading" class="repo-grid hidden" aria-label="Loading repositories"></div>
 
-        <div id="repo-error" class="repo-error hidden">
+        <div id="repo-error" class="repo-error hidden" role="status">
           <p>Could not load repositories. Check your connection or view them directly.</p>
-          <a href="https://github.com/WaleedMehmadi" target="_blank" rel="noopener noreferrer" class="demo-btn">View on GitHub</a>
+          <div class="repo-error-actions">
+            <button type="button" class="demo-btn" id="repoRetry">Try again</button>
+            <a href="https://github.com/WaleedMehmadi" target="_blank" rel="noopener noreferrer" class="demo-btn">View on GitHub</a>
+          </div>
         </div>
 
         <div id="repo-grid" class="repo-grid hidden"></div>
+        <p id="repo-status" class="repo-status hidden" role="status"></p>
 
         <div class="repo-footer reveal">
           <a href="https://github.com/WaleedMehmadi" target="_blank" rel="noopener noreferrer" class="btn ghost">View all repositories on GitHub</a>
@@ -328,7 +377,7 @@ Junior Software Engineering student at King Fahd University of Petroleum & Miner
       </div>
     </section>
 
-    <!-- ═══ EDUCATION ═══ -->
+    <!-- Education section -->
     <section class="section" id="education">
       <div class="container">
         <h2 class="reveal">Education</h2>
@@ -345,21 +394,33 @@ Junior Software Engineering student at King Fahd University of Petroleum & Miner
           </div>
           <div class="edu-courses">
             <p class="edu-courses-label">Relevant Coursework</p>
-            <div class="chip-grid">
-              <span class="chip">Data Structures & Algorithms</span>
-              <span class="chip">OOP</span>
-              <span class="chip">Database Systems</span>
-              <span class="chip">Software Engineering</span>
-              <span class="chip">Computer Networks</span>
-              <span class="chip">Artificial Intelligence</span>
-              <span class="chip">Cybersecurity Fundamentals</span>
+            <div class="edu-course-group">
+              <h4 class="edu-course-category">Software Engineering &amp; Computer Science</h4>
+              <div class="chip-grid">
+                <span class="chip">Data Structures &amp; Algorithms</span>
+                <span class="chip">Object-Oriented Programming</span>
+                <span class="chip">Database Systems</span>
+                <span class="chip">Software Engineering</span>
+                <span class="chip">Software Maintenance</span>
+                <span class="chip">Software Testing</span>
+                <span class="chip">Artificial Intelligence</span>
+              </div>
+            </div>
+            <div class="edu-course-group">
+              <h4 class="edu-course-category">Cybersecurity &amp; Networks</h4>
+              <div class="chip-grid">
+                <span class="chip">Information Security</span>
+                <span class="chip">Cryptography &amp; Network Security</span>
+                <span class="chip">Data Privacy</span>
+                <span class="chip">Computer Networks</span>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- ═══ CONTACT ═══ -->
+    <!-- Contact section -->
     <section class="section" id="contact">
       <div class="container">
         <h2 class="reveal">Contact</h2>
